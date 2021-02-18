@@ -1,0 +1,119 @@
+Configuratie VLAN-S:
+#switch
+Enable
+Configuration Terminal
+Interface range fastethernet 0/1-10 ….
+Switchport access vlan (20)
+Dit doe je voor elke switch.
+
+Geef je VLAN een naam:
+#switch
+Conf T  VLAN (20)  name (Naam)
+
+Switch Trunken:
+#switch
+Enable
+Conf t
+Interfance range gigbitethernet (0/1-2)
+Switchport mode trunk
+
+Multilayer switch conf:
+Toekennen van IP’s aan de MLS (Vlan’s)
+#MLS
+IP routing
+Interface vlan (10)
+Ip address (192.168.20.1 255.255.255.0)
+
+
+Vlan Toevoegen op MLS
+#MLS
+(Vlan 20-25-30etc) 
+Name (Boekingen)
+
+
+Multilayer switch DHCP (In MLS)
+#MLS
+DHCP configureren op VLANS
+Ip dhcp pool (vlan20)
+Network (192.168.20.0 255.255.255.0)
+Default-router (192.168.20.1)
+Dns 8.8.8.8 
+
+Multilayer Switch Geen switchport maken en trunken.
+#MLS
+Interface range (gigabitEthernet 1/0/1-2) 
+No switchport
+Switchport
+Switchport trunk encapsulation dot1q
+Switchport mode trunk
+
+Ip address toekennen aan kabel tussen Router en MLS
+#MLS 
+interface (gigabitethernet 1/0/3)
+No switchport 
+Ip address (10.0.0.1 255.0.0.0)
+No shutdown 
+
+
+
+
+
+
+
+
+
+
+
+Vlans inrichten en VTP
+#Switch (voor elke switch)
+Interface (gigabitEthernet) (0/1)
+Switchport mode trunk
+#mls 
+Interface range gigabitEthernet (1/0/1-(4))
+Switchport trunk encapsulations dot1q
+Switchport mode trunk
+#switch
+Vtp mode client (Voor elke switch)
+#mls
+Vtp domain (naam)
+#switch
+Interface range fastEthernet 0/1-(10)
+Switchport access vlan (10)
+#mls 
+Interface vlan 10/20/30
+Netwerkbeheerder inloggen op MLS en switch van afstand remote
+#pc ip toekennen of met dhcp met juiste vlan
+#switch
+Interface vlan (10)
+Ip address (ip adress)
+Dit doe je voor elke switch maar elke switch krijgt een ander ip net iets anders. Laatste cijfer anders. En ook bij de mls
+Line vty 0 4
+Password (bedenk)
+VPN gre
+Tussen 2 routers altijd
+Ip voor voor routers tussen elkaar 10.0.0.1 en 10.0.0.2
+Interface fastethernnet (poort)
+No shutdown
+Ip address ....
+-----------
+Interface tunnel 1
+Ip address 10.0.0.1 255.0.0.0
+Tunnel source fastethernet 0/1 (voorbeeld)
+Ip aan de andere kant invullen (88.88.86.40)
+Andere router 
+Interface tunnel 1
+Ip address add 10.0.0.2 255.0.0.0
+Tunnel source fastthernetnet 0/1
+Tunnel destination 62.60.60.40 (router andere kant ip)
+Ip route 172.16.0.0. 255.255.0.0 10.0.0.1 beide kanten
+Acl
+#router
+Access-list 100 deny ip 172.16.0.0 0.0.255.255 host (ip address wat je wilt blocken) 
+Access-list 100 permit ip any any
+Interface fastherthert (port) 
+Ip accces group 100 in 
+
+=
+
+
+
