@@ -116,4 +116,59 @@ Ip accces group 100 in
 =
 
 
+DHCP server
+
+Create, Assign IP/Subnet mask for VLANS
+
+#switch MLS 
+conf t
+interface vlan 10/20/30
+ip address 192.158.10.1 255.255.255.0
+
+Configure DHCP server
+
+Static (Ip address DHCP Server)
+
+DHCP service 
+Pool name (Vlan name)
+default gateway voor elke vlan in de dhcp zetten
+(voorbeeld)
+vlan3
+192.168.3.1
+8.8.8.8
+
+Configure made access/trunk in vlans
+interface (poort) fastethernet (dit doe je voor alle poorten voor een kabeletje aanzit)
+switchport trunk encapulapsion dotiq
+switchport mode trunk
+
+dit doe je ook voor normale switches! en wees er ook zeker van dat je alke vlan in elke switch zet en ook trunked
+
+Tell pc in vlans where to get IP
+
+#mls
+conft t
+int vlan 1 
+ip helper-address 192.158.1.2 
+
+dit doe je voor elke vlan en zet het IP van de DHCP erin
+
+Routing for MLS,
+
+#mls ip routing
+
+
+
+exit 
+wr
+(building configuration)
+
+
+
+
+
+
+
+
+
 
