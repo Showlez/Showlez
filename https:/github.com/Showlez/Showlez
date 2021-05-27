@@ -165,7 +165,19 @@ wr
 
 
 
+interface tunnel 0
+interface tunnel ?
+interface tunnel 0
+ip address eigen ip 100.0.0.1. 255.0.0.0
+tunnel source serial 0/0/0
+tunnel destination  andere ip 40.0.0.2 (kabel andere kant)
 
+andere router,
+
+interface tunnel 0
+ip address 100.0.0.2 eigen ip 255.0.0.0
+tunnel source serial 0/0/0
+tunnel destination 20.0.0.1
 
 
 
