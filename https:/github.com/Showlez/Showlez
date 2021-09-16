@@ -179,8 +179,67 @@ ip address 100.0.0.2 eigen ip 255.0.0.0
 tunnel source serial 0/0/0
 tunnel destination 20.0.0.1
 
+----
 
 
+Wachtwoord zetten op router en switch:
+#router enable 
+Configure terminal
+Hostname (Router1)
+Enable password (CCNA)
+Encrypt wachtwoord:
+#router. service password-encryption
+Do show running config
+#router enable secret Cisco
+Save config:  write / write memory
+
+Router configuratie:
+#router interface (interface)
+Ip address (ip   mask)
+No shutdown
+En de andere kant dus bijvoorbeeld 0/1 en 0/0
+Check welke poorten aan staan: do sh ip int brief
+Configure route
+#router ip route (ip address en mask) (ip)
+Do show ip route
+Ip route (poort g/0/0 )
+p route (ip address en mask) (ip)
+dns
+router
+# enable
+Ip route 0.0.0.0 .0.0.0.0 (ip can router naar internet of  switch of server)
+Port security
+#switch 
+Sw mode access
+Switchport port-security
+Switchport security violation restrict 
+Switchjport port-securtiy maximum 4
+Switchport port-security mac-address sticky
+Switchport mode access
+Switchport port-security
+Do sh port-sec int(g0/1)
+ -------
+Vpn 
+Crypto isakmp policy 10
+Encryption aes 256
+Authentication pre-share
+Group 5
+!
+Crypto isakmp key secretkey address 209.165.200.1
+!
+Crypto ipsec transform-set R1 -> R3 esp-aes 256 esp-sha-hmac
+!
+Crypto map IPSEC-MAP 10 ipsec-isakmp
+Set peer (ip)
+Set pfs group5
+Set security-association lifetime seconds 86400
+Set transform-set R1->R3
+Match address 100
+!
+Interface gigabitEthernet0/0
+Crypto map IPSEC-MAP
+!
+Access-list 100 permit ip 192.168.3.0. 0.0.0.255 192.168.1.0 .0.0.0.255
 
 
 
